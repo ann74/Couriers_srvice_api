@@ -6,3 +6,6 @@ starlette
 flake8
 requests
 httpx
+sqlalchemy
+alembic
+asyncpg
