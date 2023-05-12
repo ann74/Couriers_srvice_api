@@ -1,4 +1,4 @@
-from app.router import router
+from app.order.router import router as order_router
 
 from fastapi import FastAPI
 
@@ -8,7 +8,7 @@ def get_application() -> FastAPI:
         title='Yandex Lavka',
         version='1.0'
     )
-    application.include_router(router)
+    application.include_router(order_router)
 
     return application
 
