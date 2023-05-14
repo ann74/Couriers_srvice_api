@@ -13,3 +13,5 @@ class Order(Base):
     delivery_hours = Column(ARRAY(String), nullable=False)
     cost = Column(Integer, nullable=False)
     completed_time = Column(DateTime)
+
+
