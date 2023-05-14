@@ -3,6 +3,7 @@ from typing import Any
 from fastapi import FastAPI
 
 from app.order.router import router as order_router
+from app.courier.router import router as courier_router
 
 
 class CustomFastApi(FastAPI):
@@ -27,6 +28,7 @@ def get_application() -> FastAPI:
         version='1.0'
     )
     application.include_router(order_router)
+    application.include_router(courier_router)
 
     return application
 
