@@ -11,6 +11,9 @@ class OrderDto(BaseModel):
     cost: int
     completed_time: datetime | None
 
+    class Config:
+        orm_mode = True
+
 
 class CreateOrderDto(BaseModel):
     weight: float
