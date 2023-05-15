@@ -42,6 +42,6 @@ def validate_hours(cls, list_hours: list[str]) -> list[str]:
             if not (0 <= h1 <= 23 and 0 <= m1 <= 59 and 0 <= h2 <= 23 and 0 <= m2 <= 59 and
                     (h2 * 60 + m2) > (h1 * 60 + m1)):
                 raise ValueError
-        except:
+        except Exception:
             raise ValueError
     return list_hours

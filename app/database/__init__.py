@@ -1,2 +1,2 @@
-from app.order.models import *
-from app.courier.models import *
+# from app.order.models import *
+# from app.courier.models import *

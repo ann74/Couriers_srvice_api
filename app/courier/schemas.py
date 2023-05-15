@@ -50,5 +50,3 @@ class GetCouriersResponse(BaseModel):
 class GetCourierMetaInfoResponse(CourierDto):
     rating: int = 0
     earnings: int = 0
-
-
