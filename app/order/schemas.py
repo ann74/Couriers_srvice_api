@@ -28,3 +28,23 @@ class CreateOrderDto(BaseModel):
 
 class CreateOrderRequest(BaseModel):
     orders: list[CreateOrderDto]
+
+
+class GroupOrders(BaseModel):
+    group_order_id: int
+    orders: list[OrderDto]
+
+
+class CouriersGroupOrders(BaseModel):
+    courier_id: int
+    orders: list[GroupOrders]
+
+
+class CompleteOrder(BaseModel):
+    courier_id: int
+    order_id: int
+    complete_time: datetime
+
+
+class CompleteOrderRequestDto(BaseModel):
+    complete_info: list[CompleteOrder]

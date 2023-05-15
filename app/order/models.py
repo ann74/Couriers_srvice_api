@@ -12,7 +12,9 @@ class Order(Base):
     regions = Column(Integer, nullable=False)
     delivery_hours = Column(ARRAY(String), nullable=False)
     cost = Column(Integer, nullable=False)
-    completed_time = Column(DateTime)
+    completed_time = Column(DateTime(timezone=True))
+
+    order_group = relationship("OrderGroup", back_populates="order", lazy='joined')
 
 
 class GroupOrders(Base):
@@ -21,9 +23,8 @@ class GroupOrders(Base):
     group_order_id = Column(BigInteger, primary_key=True)
     courier_id = Column(Integer, ForeignKey("courier.courier_id"), nullable=False)
 
-    courier = relationship("Courier", back_populates="group_orders")
-
-    orders = relationship("OrderGroup", back_populates="group")
+    orders = relationship("OrderGroup", back_populates="group_orders", lazy='joined')
+    # courier = relationship("Courier", back_populates="group_orders", lazy='joined')
 
 
 class OrderGroup(Base):
@@ -33,6 +34,5 @@ class OrderGroup(Base):
     group_order_id = Column(Integer, ForeignKey("group_orders.group_order_id"), nullable=False)
     complete = Column(Boolean, default=False, nullable=False)
 
-    order = relationship("Order")
-    group = relationship("GroupOrders", back_populates="orders")
-
+    order = relationship("Order", back_populates="order_group", lazy='joined')
+    group_orders = relationship("GroupOrders", back_populates="orders", lazy='joined')

@@ -1,5 +1,5 @@
 from sqlalchemy import Column, Integer, BigInteger, String, ARRAY, Enum
-from sqlalchemy.orm import relationship
+# from sqlalchemy.orm import relationship
 
 from app.courier.schemas import CourierType
 from app.database.database import Base
@@ -13,4 +13,4 @@ class Courier(Base):
     regions = Column(ARRAY(Integer), nullable=False)
     working_hours = Column(ARRAY(String), nullable=False)
 
-    group_orders = relationship("GroupOrders", back_populates="courier")
+    # group_orders = relationship("GroupOrders", back_populates="courier", lazy='joined')

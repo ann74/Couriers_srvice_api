@@ -45,3 +45,10 @@ class GetCouriersResponse(BaseModel):
     couriers: list[CourierDto]
     limit: int
     offset: int
+
+
+class GetCourierMetaInfoResponse(CourierDto):
+    rating: int = 0
+    earnings: int = 0
+
+
