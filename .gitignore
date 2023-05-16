@@ -9,5 +9,5 @@ deploy/.cache/
 **/logs
 postgres_data
 /docker-compose_bd.yml
-/Dockerfile-init
 /docker-compose-my.yml
+/Dockerfile-my
