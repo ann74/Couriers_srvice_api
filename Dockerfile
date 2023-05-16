@@ -1,18 +1,13 @@
-FROM python:3.10-alpine3.17 as builder
+FROM python:3.10-alpine3.17
 
-RUN python3 -m venv /app
-RUN /app/bin/pip install -U pip
-
-COPY requirements.txt /mnt/
-RUN /app/bin/pip install -Ur /mnt/requirements.txt
-
-FROM python:3.10-alpine3.17 as app
+RUN mkdir /app
 
 WORKDIR /app
 
-COPY --from=builder /app /app
+COPY requirements.txt .
+
+RUN pip install -r requirements.txt
+
 COPY . .
 
-EXPOSE 8000
-
-CMD /app/bin/uvicorn app.main:app --host=0.0.0.0 --port=8080
+CMD sh -c "alembic upgrade head && uvicorn app.main:app --host=0.0.0.0 --port=8080"
