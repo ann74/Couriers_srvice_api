@@ -1,11 +1,17 @@
 from typing import Any
-import subprocess
 
 from fastapi import FastAPI
+
+from slowapi import Limiter, _rate_limit_exceeded_handler
+from slowapi.util import get_remote_address
+from slowapi.errors import RateLimitExceeded
+from slowapi.middleware import SlowAPIMiddleware
 
 from app.order.router import router as order_router
 from app.courier.router import router as courier_router
 
+
+limiter = Limiter(key_func=get_remote_address, application_limits=["10/second"], key_style="endpoint")
 
 class CustomFastApi(FastAPI):
     def openapi(self) -> dict[str, Any]:
@@ -30,6 +36,9 @@ def get_application() -> FastAPI:
     )
     application.include_router(order_router)
     application.include_router(courier_router)
+    application.state.limiter = limiter
+    application.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
+    application.add_middleware(SlowAPIMiddleware)
 
     return application
 

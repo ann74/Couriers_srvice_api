@@ -40,6 +40,6 @@ API сервиса должен соответствовать схеме в ф�
 В файле requirements.txt
 
 ## Запуск
-`docker-compose up -d`
+`docker-compose up -d --build`
 
 

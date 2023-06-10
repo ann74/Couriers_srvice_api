@@ -9,4 +9,5 @@ httpx
 sqlalchemy
 alembic
 asyncpg
+slowapi
 
