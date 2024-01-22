@@ -11,3 +11,4 @@ postgres_data
 /docker-compose_bd.yml
 /docker-compose-my.yml
 /Dockerfile-my
+.env

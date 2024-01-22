@@ -18,7 +18,7 @@ class CourierType(str, Enum):
 class CourierDto(BaseModel):
     courier_id: int
     courier_type: CourierType
-    regions: list[int]
+    regions: list[PositiveInt]
     working_hours: list[str]
 
     class Config:

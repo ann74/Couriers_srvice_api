@@ -13,6 +13,7 @@ from app.courier.router import router as courier_router
 
 limiter = Limiter(key_func=get_remote_address, application_limits=["10/second"], key_style="endpoint")
 
+
 class CustomFastApi(FastAPI):
     def openapi(self) -> dict[str, Any]:
         super().openapi()

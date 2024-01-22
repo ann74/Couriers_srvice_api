@@ -21,4 +21,4 @@ async def get_courier_by_id(id_: int, db: AsyncSession) -> CourierDto | None:
 
 async def get_couriers_all(limit: int, offset: int, db: AsyncSession) -> Sequence[Row | RowMapping | Any]:
     couriers = await db.execute(select(Courier).order_by(Courier.courier_id).limit(limit).offset(offset))
-    return couriers.scalars().all()
+    return couriers.unique().scalars().all()

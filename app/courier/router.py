@@ -33,6 +33,7 @@ router = APIRouter(
 @router.get('', response_model=GetCouriersResponse)
 async def get_couriers(pagination_params: Paginator = Depends(), db: AsyncSession = Depends(get_async_session)):
     couriers = await get_couriers_all(pagination_params.limit, pagination_params.offset, db)
+    couriers = [CourierDto(**jsonable_encoder(courier)) for courier in couriers]
     return GetCouriersResponse(couriers=couriers, limit=pagination_params.limit, offset=pagination_params.offset)
 
 
@@ -48,6 +49,7 @@ async def get_courier(courier_id: int, db: AsyncSession = Depends(get_async_sess
 @router.post('', response_model=CreateCouriersResponse)
 async def create_couriers(couriers: CreateCourierRequest, db: AsyncSession = Depends(get_async_session)):
     added_couriers = await add_couriers(couriers.couriers, db)
+    added_couriers = [CourierDto(**jsonable_encoder(courier)) for courier in added_couriers]
     return CreateCouriersResponse(couriers=added_couriers)
 
 

@@ -22,7 +22,7 @@ async def get_order_by_id(id_: int, db: AsyncSession) -> OrderDto | None:
 
 async def get_orders_all(limit: int, offset: int, db: AsyncSession) -> Sequence[Row | RowMapping | Any]:
     orders = await db.execute(select(Order).order_by(Order.order_id).limit(limit).offset(offset))
-    return orders.scalars().all()
+    return orders.unique().scalars().all()
 
 
 async def get_order_group_by_id(id_: int, db: AsyncSession) -> Row | None:

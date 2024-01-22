@@ -10,4 +10,5 @@ sqlalchemy
 alembic
 asyncpg
 slowapi
+python-dotenv
 
